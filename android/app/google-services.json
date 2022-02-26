@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "883826637450",
+    "project_id": "fitrugby-b0b8c",
+    "storage_bucket": "fitrugby-b0b8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883826637450:android:5f5e61ec26d31ae0158b73",
+        "android_client_info": {
+          "package_name": "com.fit.rugby.fitrugby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883826637450-khpoceieuvrjhtf16onjjo47s92ulg76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJeDm8Mkd_x7-y4EhudMh5WwxJKu22FXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883826637450-khpoceieuvrjhtf16onjjo47s92ulg76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
