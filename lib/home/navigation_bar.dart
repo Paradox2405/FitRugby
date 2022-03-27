@@ -24,7 +24,7 @@ class NavigationBar extends GetView<HomeController>{
         ),
       ],
       selectedItemColor: Colors.black,
-      onTap: controller.changeTabIndex,
+      onTap: controller.changeNavPage,
       currentIndex: controller.tabIndex,
     );
   }

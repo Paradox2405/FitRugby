@@ -2,13 +2,9 @@ import 'package:fitrugby/routes/Routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-import 'login_controller.dart';
-
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-  final LoginController controller = Get.put(LoginController());
+class RegistrationPage extends StatelessWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +40,6 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
-                                controller: controller.email,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: 'Email',
@@ -58,11 +53,23 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
-                                controller: controller.password,
-                                obscureText: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: 'Password',
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 280,
+                              child: TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Repeat Password',
                                 ),
                               ),
                             )
@@ -78,32 +85,12 @@ class LoginPage extends StatelessWidget {
                                   primary: Colors.red,minimumSize: Size(180, 60),shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
-                                  controller.login();
-                                },
-                                child: Text("Login"),),
-                            ),
-                            SizedBox(width: 10,),
-                            Container(
-                              width: 120,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.red,minimumSize: Size(180, 60),shape: StadiumBorder(),
-                                ),
-                                onPressed: () {
-                                  Get.toNamed(Routes.registration);
+
                                 },
                                 child: Text("Sign Up"),),
                             ),
                           ],
                         ),
-                        SignInButton(
-                            Buttons.Google,
-                            elevation: 5,
-                            text: "Sign in with Google",
-                            onPressed: () async {
-                              controller.googleLogin();
-                            }
-                        )
                       ],
                     ),
                   ),

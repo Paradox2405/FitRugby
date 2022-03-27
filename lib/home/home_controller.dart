@@ -16,7 +16,7 @@ class HomeController extends GetxController {
     super.onReady();
   }
 
-  void changeTabIndex(int index) {
+  void changeNavPage(int index) {
     print(Get.currentRoute);
     tabIndex = index;
     Get.back();

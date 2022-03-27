@@ -1,4 +1,4 @@
-import 'package:fitrugby/navbar/navigation_bar.dart';
+import 'package:fitrugby/home/navigation_bar.dart';
 import 'package:fitrugby/routes/Routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

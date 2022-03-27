@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "883826637450",
+    "firebase_url": "https://fitrugby-b0b8c-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "fitrugby-b0b8c",
     "storage_bucket": "fitrugby-b0b8c.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "883826637450-4c2o95ug09lo9utt6t17p4en9ftugcbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fit.rugby.fitrugby",
+            "certificate_hash": "d9d4c106e8f4a766dfbe8689fb3770df664bdae8"
+          }
+        },
         {
           "client_id": "883826637450-khpoceieuvrjhtf16onjjo47s92ulg76.apps.googleusercontent.com",
           "client_type": 3

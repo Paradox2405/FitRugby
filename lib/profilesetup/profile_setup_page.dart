@@ -2,13 +2,9 @@ import 'package:fitrugby/routes/Routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-import 'login_controller.dart';
-
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-  final LoginController controller = Get.put(LoginController());
+class ProfileSetupPage extends StatelessWidget {
+  const ProfileSetupPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +40,9 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
-                                controller: controller.email,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  hintText: 'Email',
+                                  hintText: 'Name',
                                 ),
                               ),
                             )
@@ -58,11 +53,38 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
-                                controller: controller.password,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  hintText: 'Password',
+                                  hintText: 'Weight in KG',
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 280,
+                              child: TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Height in CM',
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 280,
+                              child: TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Playing position',
                                 ),
                               ),
                             )
@@ -78,32 +100,12 @@ class LoginPage extends StatelessWidget {
                                   primary: Colors.red,minimumSize: Size(180, 60),shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
-                                  controller.login();
+                                  Get.offAndToNamed(Routes.home);
                                 },
-                                child: Text("Login"),),
-                            ),
-                            SizedBox(width: 10,),
-                            Container(
-                              width: 120,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.red,minimumSize: Size(180, 60),shape: StadiumBorder(),
-                                ),
-                                onPressed: () {
-                                  Get.toNamed(Routes.registration);
-                                },
-                                child: Text("Sign Up"),),
+                                child: Text("Next"),),
                             ),
                           ],
                         ),
-                        SignInButton(
-                            Buttons.Google,
-                            elevation: 5,
-                            text: "Sign in with Google",
-                            onPressed: () async {
-                              controller.googleLogin();
-                            }
-                        )
                       ],
                     ),
                   ),
