@@ -6,16 +6,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:fitrugby/routes/Routes.dart';
 
-class PrebuiltWorkoutSelectionPage
-    extends GetView<PrebuiltWorkoutSelectionController> {
+class PrebuiltWorkoutSelectionPage extends GetView<PrebuiltWorkoutSelectionController> {
   const PrebuiltWorkoutSelectionPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      bottomNavigationBar: const NavigationBar(),
-      body: Container(
+      bottomNavigationBar:  NavigationBar(),
+      body:controller.loading.isTrue?Container(alignment: Alignment.center,child:CircularProgressIndicator()): Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/background.png'), fit: BoxFit.cover)),
@@ -41,7 +41,7 @@ class PrebuiltWorkoutSelectionPage
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: mainDataSet[index].workout=="Rest"?Colors.white70:Colors.red),
+                        color: (mainDataSet[index].workout=="Rest")||controller.prefs.getBool('day${mainDataSet[index].day}')==true?Colors.red:Colors.redAccent),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

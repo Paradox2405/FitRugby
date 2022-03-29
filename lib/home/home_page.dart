@@ -7,143 +7,150 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  @override
+  final controller = Get.put(HomeController());
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: null,
-      bottomNavigationBar: const NavigationBar(),
-
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
+    return SafeArea(
+      child: Scaffold(
+        appBar: null,
+        bottomNavigationBar: NavigationBar(),
+        body: Container(
+          decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/bgmain.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child:Column(
-            children: [
-              SizedBox(
-                height: 60,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Welcome, Alex",
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Start your fitness journey\nhere!",
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ],
-              ),
-              SizedBox(height: 80,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 400,
-                    width: 300,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(255, 255, 255, 100),
-                        borderRadius: BorderRadius.circular(20)),
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  image: AssetImage('assets/bgmain.png'), fit: BoxFit.cover)),
+          padding: EdgeInsets.all(10),
+          child: controller.loading
+              ? Container(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator())
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
                       children: [
-                        Text("Summery",style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(
-                          height: 10,
+                        Text(
+                          "Welcome, ${controller.name.text}",
+                          style: TextStyle(fontSize: 40),
                         ),
-                        Text("Your Position: Winger"),
-                        SizedBox(
-                          height: 2,
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Start your fitness journey\nhere!",
+                          style: TextStyle(fontSize: 25),
                         ),
-                        Text("Your BMI:"),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("State"),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Program Completion"),
-                        SizedBox(
-                          height: 2,
-                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 80,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Container(
+                          height: 400,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(255, 255, 255, 100),
+                              borderRadius: BorderRadius.circular(20)),
                           padding: EdgeInsets.all(10),
-                          color: Colors.blueGrey,
-                          width: 170,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "13/30 Days",
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
+                              Text(
+                                "Summery",
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircularPercentIndicator(
-                                    radius: 60.0,
-                                    lineWidth: 20.0,
-                                    percent: .5,
-                                    center: new Text(
-                                      "50%",
-                                      style: TextStyle(color: Colors.white),
+                              Text(
+                                  "Your Position: ${controller.position.text}"),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text("Your BMI: ${controller.bmi.text}"),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text("State: ${controller.state.text}"),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text("Program Completion"),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                color: Colors.blueGrey,
+                                width: 170,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "${controller.days.text}/30 Days",
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      ],
                                     ),
-                                    progressColor: Colors.red,
-                                    backgroundColor: Colors.redAccent,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Complete",
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CircularPercentIndicator(
+                                          radius: 60.0,
+                                          lineWidth: 20.0,
+                                          percent: controller.percentage!,
+                                          center: Text(
+                                            "${controller.percentage!*100}%",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          progressColor: Colors.red,
+                                          backgroundColor: Colors.redAccent,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Complete",
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 100,
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ],
-              ),
-            ],
-          ),)
-        ],
+                  ],
+                ),
+        ),
       ),
     );
   }

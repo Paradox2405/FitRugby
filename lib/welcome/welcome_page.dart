@@ -1,10 +1,12 @@
 import 'package:fitrugby/routes/Routes.dart';
+import 'package:fitrugby/welcome/welcome_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class WelcomePage extends GetView<WelcomePageController>{
+  @override
+  final controller=Get.put(WelcomePageController());
 
   @override
   Widget build(BuildContext context) {

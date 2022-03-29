@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavigationBar extends GetView<HomeController>{
-  const NavigationBar({Key? key}) : super(key: key);
-
+   NavigationBar({Key? key}) : super(key: key);
+  @override
+  final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(

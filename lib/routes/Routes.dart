@@ -8,8 +8,10 @@ import 'package:fitrugby/prebuiltworkout/selected_workout_binding.dart';
 import 'package:fitrugby/prebuiltworkout/selected_workout_page.dart';
 import 'package:fitrugby/profilepage/profile_binding.dart';
 import 'package:fitrugby/profilepage/profile_page.dart';
+import 'package:fitrugby/profilesetup/profile_setup_binding.dart';
 import 'package:fitrugby/profilesetup/profile_setup_page.dart';
 import 'package:fitrugby/registration/registration_page.dart';
+import 'package:fitrugby/welcome/welcome_binding.dart';
 import 'package:fitrugby/welcome/welcome_page.dart';
 import 'package:fitrugby/workouttype/workout_type_binding.dart';
 import 'package:fitrugby/workouttype/workout_type_page.dart';
@@ -32,6 +34,7 @@ class Routes{
     GetPage(
       name: Routes.welcome,
       page: ()=> WelcomePage(),
+      binding: WelcomeBinding(),
     ),
     GetPage(
       name: Routes.login,
@@ -60,6 +63,7 @@ class Routes{
     GetPage(
       name: Routes.profilesetup,
       page: ()=> ProfileSetupPage(),
+      binding: ProfileSetupBinding(),
     ),
     GetPage(
       name: Routes.prebuiltselection,

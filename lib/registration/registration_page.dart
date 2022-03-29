@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegistrationPage extends StatelessWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+  RegistrationPage({Key? key}) : super(key: key);
+  final  email=TextEditingController();
+  final  password=TextEditingController();
+  final  repeatPw=TextEditingController();
+  bool complete=false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class RegistrationPage extends StatelessWidget {
                   Container(
                     height: 400,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                      color: Color.fromRGBO(255, 255, 255, 60),
                         borderRadius: BorderRadius.circular(20),),
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -40,6 +45,7 @@ class RegistrationPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
+                                controller: email,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: 'Email',
@@ -53,6 +59,8 @@ class RegistrationPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
+                                controller: password,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: 'Password',
@@ -66,6 +74,7 @@ class RegistrationPage extends StatelessWidget {
                             Container(
                               width: 280,
                               child: TextField(
+                                controller: repeatPw,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -85,6 +94,8 @@ class RegistrationPage extends StatelessWidget {
                                   primary: Colors.red,minimumSize: Size(180, 60),shape: StadiumBorder(),
                                 ),
                                 onPressed: () {
+                                  checkPw();
+                                  complete?Get.toNamed(Routes.profilesetup,arguments: [email.text,password.text]):null;
 
                                 },
                                 child: Text("Sign Up"),),
@@ -102,4 +113,21 @@ class RegistrationPage extends StatelessWidget {
       ),
     );
   }
+  checkPw(){
+    if (password.text!=repeatPw.text){
+      password.text="";
+      repeatPw.text="";
+      Get.snackbar("Error", "Passwords don't match",backgroundColor: Colors.white);
+    }else if (password.text.length<6){
+      password.text="";
+      repeatPw.text="";
+      Get.snackbar("Error", "Password must be 6 or more characters",backgroundColor: Colors.white, duration: const Duration(seconds: 5),);
+    }else if(email.text.isEmpty){
+      Get.snackbar("Error", "Email cannot be empty",backgroundColor: Colors.white);
+    }
+    else{
+      complete=true;
+    }
+  }
 }
+

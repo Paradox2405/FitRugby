@@ -11,7 +11,7 @@ class ProfilePage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      bottomNavigationBar: const NavigationBar(),
+      bottomNavigationBar: NavigationBar(),
       body: Stack(
         children: [
           Container(

@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                   Container(
                     height: 400,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                      color: Color.fromRGBO(255, 255, 255, 60),
                         borderRadius: BorderRadius.circular(20),),
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -100,8 +100,8 @@ class LoginPage extends StatelessWidget {
                             Buttons.Google,
                             elevation: 5,
                             text: "Sign in with Google",
-                            onPressed: () async {
-                              controller.googleLogin();
+                            onPressed: () => {
+                             Get.toNamed(Routes.profilesetup,arguments: ["G"]),
                             }
                         )
                       ],
