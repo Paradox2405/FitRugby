@@ -2,15 +2,20 @@ import 'package:fitrugby/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NavigationBar extends GetView<HomeController>{
-   NavigationBar({Key? key}) : super(key: key);
+class NavBar extends GetView<HomeController>{
+   NavBar({Key? key}) : super(key: key);
   @override
-  final controller = Get.put(HomeController());
+  final HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+        init: HomeController(),
+    builder: (controller){
     return BottomNavigationBar(
+      fixedColor: Colors.black,
+      type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.red,
-      items: const <BottomNavigationBarItem>[
+      items:  <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
@@ -20,14 +25,17 @@ class NavigationBar extends GetView<HomeController>{
           label: 'Workouts',
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.candlestick_chart),
+          label: 'Reports',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Profile',
         ),
       ],
-      selectedItemColor: Colors.black,
       onTap: controller.changeNavPage,
       currentIndex: controller.tabIndex,
     );
+    },);
   }
-
 }

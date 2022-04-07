@@ -18,12 +18,11 @@ class HomeController extends GetxController {
   double weight=0.0;
   int? coun=0;
   bool loading = true;
-  var tabIndex = 0;
+  late int tabIndex=0;
 
   @override
   void onInit(){
-    WidgetsFlutterBinding.ensureInitialized();
-
+    update();
     print('>>> HomeController init');
     super.onInit();
   }
@@ -31,7 +30,6 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     loadVals();
-    loading = false;
     print('>>> HomeController ready');
     super.onReady();
   }
@@ -39,16 +37,22 @@ class HomeController extends GetxController {
   void changeNavPage(int index) {
     print(Get.currentRoute);
     tabIndex = index;
-    Get.back();
-    index == 0 ? Get.toNamed(Routes.home) : null;
-    index == 1 ? Get.toNamed(Routes.workouttype) : null;
-    index == 2 ? Get.toNamed(Routes.profile) : null;
-    update();
+    index == 0 ? {Get.toNamed(Routes.home),update()} : null;
+    index == 1 ? {Get.toNamed(Routes.workouttype),update()} : null;
+    index == 2 ? {Get.toNamed(Routes.reports),update()} : null;
+    index == 3 ? {Get.toNamed(Routes.profile),update()} : null;
+
   }
 
   loadVals() async{
-    await _prefs.then((SharedPreferences prefs) => initValues(prefs),);
-
+   try {
+      await _prefs.then(
+        (SharedPreferences prefs) => initValues(prefs),
+      );
+    }catch(e){
+     print(e);
+   }
+   loading = false;
     update();
   }
   initValues(prefs){

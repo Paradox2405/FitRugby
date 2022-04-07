@@ -17,6 +17,9 @@ import 'package:fitrugby/workouttype/workout_type_binding.dart';
 import 'package:fitrugby/workouttype/workout_type_page.dart';
 import 'package:get/get.dart';
 
+import '../reports/reports_binding.dart';
+import '../reports/reports_page.dart';
+
 class Routes{
   static final String welcome = "/welcome_page";
   static final String login= "/login_page";
@@ -27,6 +30,7 @@ class Routes{
   static final String profile = "/profile_page";
   static final String prebuiltselection = "/prebuilt_workout_selection_page";
   static final String selectedworkout = "/selected_workout_page";
+  static final String reports = "/reports_page";
 
 
 
@@ -74,6 +78,11 @@ class Routes{
       name: Routes.selectedworkout,
       page: ()=> SelectedWorkoutPage(),
       binding: SelectedWorkoutBinding(),
+    ),
+    GetPage(
+      name: Routes.reports,
+      page: ()=> ReportsPage(),
+      binding: ReportsBinding(),
     ),
   ];
 }

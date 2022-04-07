@@ -49,15 +49,12 @@ class ProfileSetupController extends GetxController {
     } else if (arg[0] == "L") {
 
       addDetails();
-      Get.back();
-      Get.toNamed(Routes.home);
-
     } else {
       try {
-        print(arg[1].toString());
         await _auth.createUserWithEmailAndPassword(
             email: arg[0], password: arg[1]);
-        if (_auth.currentUser!.uid!=null){
+        if (_auth.currentUser!.uid.isNotEmpty){
+          print("error!!!!!!!!!!!!!");
           addDetails();
         }else {
           Get.snackbar("Error", "Cant Register");
@@ -74,13 +71,17 @@ class ProfileSetupController extends GetxController {
     double high = double.parse(height.text);
     double wei = double.parse(weight.text);
     final SharedPreferences prefs = await _prefs;
-    await prefs.setString('fname', fName.text);
-    await prefs.setString('lname', lName.text);
-    await prefs.setDouble('height', high);
-    await prefs.setDouble('weight', wei);
-    await prefs.setString('position', position.text);
-    await prefs.setInt('counter', 0);
-    await prefs.setBool('day1', false);
+    try{
+      await prefs.setString('fname', fName.text);
+      await prefs.setString('lname', lName.text);
+      await prefs.setDouble('height', high);
+      await prefs.setDouble('weight', wei);
+      await prefs.setString('position', position.text);
+      await prefs.setInt('counter', 0);
+      await prefs.setBool('day1', false);
+    }catch (e){
+      print(e);
+    }
     update();
     Get.back();
     Get.toNamed(Routes.home);
@@ -100,7 +101,6 @@ class ProfileSetupController extends GetxController {
 
       final User? user = authResult.user;
       assert(!user!.isAnonymous);
-      assert(await user!.getIdToken() != null);
       final User? currentUser = _auth.currentUser;
       assert(user!.uid == currentUser!.uid);
       if (authResult.user!.uid.isNotEmpty) {

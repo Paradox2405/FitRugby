@@ -12,7 +12,7 @@ class WorkoutTypePage extends GetView<WorkoutTypeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      bottomNavigationBar:  NavigationBar(),
+      bottomNavigationBar:  NavBar(),
       body: Stack(
         children: [
           Container(

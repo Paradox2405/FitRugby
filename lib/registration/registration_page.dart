@@ -15,16 +15,11 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/background.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+      body: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/background.png'), fit: BoxFit.cover)),
+    child:
           Column(
             children: [
               SizedBox(height: 120,),
@@ -109,7 +104,7 @@ class RegistrationPage extends StatelessWidget {
               ),
             ],
           ),
-        ],
+
       ),
     );
   }
