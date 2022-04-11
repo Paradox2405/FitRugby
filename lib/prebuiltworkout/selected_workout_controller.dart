@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:fitrugby/data/workout_data.dart';
+import 'package:fitrugby/models/workout_report_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,6 +9,8 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class SelectedWorkoutController extends GetxController {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  WorkoutReport saveReport = WorkoutReport();
+  DateTime now = DateTime.now();
   int dataItem = Get.arguments[0];
   bool watch = false;
   final isHours = true;
@@ -58,6 +63,9 @@ class SelectedWorkoutController extends GetxController {
   Future<void> startWorkout(int day, int index) async {
     final SharedPreferences prefs = await _prefs;
     taps++;
+    int? counter;
+    int? indexVal;
+    String formattedDate = DateFormat("yyyy-MM-dd").format(now);
     if (taps == 1) {
       startBtnText.text = "FINISH";
       watch = true;
@@ -72,7 +80,7 @@ class SelectedWorkoutController extends GetxController {
         calories.add(mainDataSet[index].subCategory[i].calories);
       }
       var totalCalorie = calories.reduce((a, b) => a + b);
-      int? counter;
+
       Get.defaultDialog(
         barrierDismissible: false,
         title: "Day " + day.toString(),
@@ -106,6 +114,15 @@ class SelectedWorkoutController extends GetxController {
                 counter = prefs.getInt('counter'),
                 await prefs.setBool('day$day', true),
                 await prefs.setInt('counter', counter! + 2),
+                indexVal = prefs.getInt('indexVal'),
+                saveReport.id = indexVal,
+                saveReport.date = formattedDate,
+                saveReport.time = _printDuration(elapsed).toString(),
+                saveReport.calories = totalCalorie.toString(),
+                await prefs.setString(
+                    'workoutDay$indexVal', json.encode(saveReport)),
+                await prefs.setInt('indexVal', indexVal! + 1),
+                update(),
                 Get.back(),
               },
               child: Text(
@@ -118,7 +135,8 @@ class SelectedWorkoutController extends GetxController {
                     fontWeight: FontWeight.w900),
               ),
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red)),
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
             ),
           ],
         ),

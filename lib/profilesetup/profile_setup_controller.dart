@@ -78,13 +78,16 @@ class ProfileSetupController extends GetxController {
       await prefs.setDouble('weight', wei);
       await prefs.setString('position', position.text);
       await prefs.setInt('counter', 0);
+      await prefs.setInt('indexVal', 0);
       await prefs.setBool('day1', false);
     }catch (e){
-      print(e);
+      Get.snackbar("Error", "$e");
     }
     update();
     Get.back();
-    Get.toNamed(Routes.home);
+    await _prefs.then(
+          (SharedPreferences prefs) => Get.offAndToNamed(Routes.home),
+    );
   }
 
   googleLogin() async {

@@ -8,13 +8,13 @@ class WelcomePageController extends GetxController {
   @override
   void onInit() {
     redirect();
-    print('>>> WController init');
+    print('>>> WelcomeController init');
     super.onInit();
   }
 
   @override
   void onReady() {
-    print('>>> WController ready');
+    print('>>> WelcomeController ready');
     super.onReady();
   }
 
