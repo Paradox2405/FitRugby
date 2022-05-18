@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:fitrugby/data/workout_data.dart';
+import 'package:fitrugby/models/workout_data.dart';
 import 'package:fitrugby/models/workout_report_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';

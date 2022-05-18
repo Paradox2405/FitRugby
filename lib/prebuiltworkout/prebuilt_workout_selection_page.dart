@@ -1,4 +1,4 @@
-import 'package:fitrugby/data/workout_data.dart';
+import 'package:fitrugby/models/workout_data.dart';
 import 'package:fitrugby/home/navigation_bar.dart';
 import 'package:fitrugby/prebuiltworkout/prebuilt_workout_selection_controller.dart';
 import 'package:flutter/material.dart';

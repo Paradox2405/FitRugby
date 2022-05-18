@@ -118,7 +118,7 @@ class WorkoutTypePage extends GetView<WorkoutTypeController> {
                                   ),
                                 ),
                                 onTap: () {
-                                  //path
+                                  Get.toNamed(Routes.onlineworkout);
                                 },
                               ),
                             ],

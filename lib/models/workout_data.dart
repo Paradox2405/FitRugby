@@ -1,4 +1,4 @@
-import 'package:fitrugby/data/workout_model.dart';
+import 'package:fitrugby/models/workout_model.dart';
 
 final List<WorkoutModel> mainDataSet = [
   WorkoutModel(
