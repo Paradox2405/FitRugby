@@ -4,6 +4,8 @@ import 'package:fitrugby/onlineworkout/online_workouts_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../routes/Routes.dart';
+
 class OnlineWorkoutsPage extends GetView<OnlineWorkoutsController> {
   @override
   final OnlineWorkoutsController controller = Get.put(OnlineWorkoutsController());
@@ -49,10 +51,11 @@ class OnlineWorkoutsPage extends GetView<OnlineWorkoutsController> {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return InkWell(
-                                            onTap:()=>{ print(index)},
+                                            onTap:()=>{ Get.toNamed(Routes.selectedonlineworkout,arguments: controller.workoutData.docs[index].data())},
                                             child: Container(
                                               margin: EdgeInsets.only(
                                                   bottom: 4, top: 4),
+                                              padding: EdgeInsets.all(20),
                                               decoration: BoxDecoration(
                                                 color: Color(myBgColors[myBgColors.indexWhere((element) => element.name==controller.workoutData.docs[index].data()["color"])].color.value),
                                                 borderRadius:
@@ -108,7 +111,23 @@ class OnlineWorkoutsPage extends GetView<OnlineWorkoutsController> {
                                 ],
                               ),
                             ),
-
+                      ),
+                      SizedBox(height: 10,),
+                      ElevatedButton(
+                        onPressed: () => {
+                          controller.refreshItems(),
+                        },
+                        child: Text(
+                          "REFRESH",
+                          style: TextStyle(
+                              decoration: null,
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor:
+                            MaterialStateProperty.all(Colors.red)),
                       ),
                     ],
                   ),

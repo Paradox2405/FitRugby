@@ -31,6 +31,7 @@ class OnlineWorkoutsController extends GetxController {
   }
 
   getWorkouts() async {
+    print("Getting workouts!!!");
     collection= FirebaseFirestore.instance.collection('workouts');
     collection.get().then((value){
       workoutData=value;
@@ -41,6 +42,14 @@ class OnlineWorkoutsController extends GetxController {
    loading=false;
    update();
 
+  }
+
+  refreshItems(){
+    loading=true;
+    update();
+    getWorkouts();
+    loading=false;
+    update();
   }
 
 }

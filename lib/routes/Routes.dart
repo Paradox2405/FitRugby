@@ -18,6 +18,8 @@ import 'package:fitrugby/workouttype/workout_type_page.dart';
 import 'package:get/get.dart';
 import '../onlineworkout/online_workouts_binding.dart';
 import '../onlineworkout/online_workouts_page.dart';
+import '../onlineworkout/selected_onlineworkout_binding.dart';
+import '../onlineworkout/selected_onlineworkout_page.dart';
 import '../reports/reports_binding.dart';
 import '../reports/reports_page.dart';
 
@@ -33,6 +35,7 @@ class Routes{
   static final String selectedworkout = "/selected_workout_page";
   static final String reports = "/reports_page";
   static final String onlineworkout = "/online_workouts_page";
+  static final String selectedonlineworkout = "/selected_onlineworkout_page";
 
 
 
@@ -90,6 +93,11 @@ class Routes{
       name: Routes.onlineworkout,
       page: ()=> OnlineWorkoutsPage(),
       binding: OnlineWorkoutsBinding(),
+    ),
+    GetPage(
+      name: Routes.selectedonlineworkout,
+      page: ()=> SelectedOnlineWorkoutPage(),
+      binding: SelectedOnlineWorkoutBinding(),
     ),
   ];
 }

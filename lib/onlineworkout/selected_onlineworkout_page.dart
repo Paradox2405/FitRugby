@@ -1,25 +1,22 @@
-import 'package:fitrugby/models/workout_data.dart';
 import 'package:fitrugby/home/navigation_bar.dart';
-import 'package:fitrugby/prebuiltworkout/selected_workout_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fitrugby/onlineworkout/selected_onlineworkout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../routes/Routes.dart';
+import '../models/colors_data.dart';
 
-class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
+
+class SelectedOnlineWorkoutPage extends GetView<SelectedOnlineWorkoutController> {
   @override
-  final SelectedWorkoutController controller =
-      Get.put(SelectedWorkoutController());
+  final SelectedOnlineWorkoutController controller =
+      Get.put(SelectedOnlineWorkoutController());
 
-  SelectedWorkoutPage({Key? key}) : super(key: key);
+  SelectedOnlineWorkoutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var dataItem = Get.arguments[0];
-    return GetBuilder<SelectedWorkoutController>(
-      init: SelectedWorkoutController(),
+    return GetBuilder<SelectedOnlineWorkoutController>(
+      init: SelectedOnlineWorkoutController(),
       builder: (controller) {
         return Scaffold(
           appBar: null,
@@ -31,78 +28,12 @@ class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
                     fit: BoxFit.cover)),
             child: Container(
               padding: EdgeInsets.fromLTRB(20, 80, 20, 10),
-              child: mainDataSet[dataItem].workout == "Rest"
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 255, 255, 100),
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  TextButton(
-                                    child: Container(
-                                        padding:
-                                            EdgeInsets.fromLTRB(15, 5, 5, 5),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular((8)),
-                                            color: Colors.red),
-                                        child: Icon(
-                                          Icons.arrow_back_ios,
-                                          color: Colors.black,
-                                          size: 25,
-                                        )),
-                                    onPressed: () {
-                                      Get.toNamed(Routes.prebuiltselection);
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "DAY " +
-                                        mainDataSet[dataItem].day.toString(),
-                                    style: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.blueGrey,
-                                thickness: 1,
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                              Container(
-                                child: Text(
-                                  "Rest Day",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 50),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
+              child: Column(
                       children: [
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color.fromRGBO(255, 255, 255, 100),
+                                color: Color(myBgColors[myBgColors.indexWhere((element) => element.name==controller.workoutData['color'])].color.value),
                                 borderRadius: BorderRadius.circular(20)),
                             padding: EdgeInsets.all(10),
                             child: Column(
@@ -132,10 +63,9 @@ class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
                                       width: 20,
                                     ),
                                     Text(
-                                      "DAY " +
-                                          mainDataSet[dataItem].day.toString(),
+                                      controller.workoutData['title'].toString(),
                                       style: TextStyle(
-                                          fontSize: 30,
+                                          fontSize: 25,
                                           fontWeight: FontWeight.w900),
                                     ),
                                   ],
@@ -149,19 +79,17 @@ class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      itemCount: mainDataSet[dataItem]
-                                          .subCategory
-                                          .length,
+                                      itemCount:controller.workoutData['data'].length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Container(
                                           margin: EdgeInsets.only(
                                               bottom: 2, top: 2),
-                                          padding: EdgeInsets.all(15),
+                                          padding: EdgeInsets.all(25),
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                                BorderRadius.circular(10),
                                             boxShadow: [
                                               BoxShadow(
                                                 color:
@@ -181,124 +109,18 @@ class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children:[
                                                       Text(
-                                                        mainDataSet[dataItem]
-                                                            .subCategory[index]
-                                                            .workout,
+                                                        controller.workoutData['data']['data${index+1}'].toString(),
                                                         overflow:
                                                             TextOverflow.ellipsis,
                                                         maxLines: 1,
                                                         softWrap: false,
                                                         style: TextStyle(
-                                                            fontSize: 25,
+                                                            fontSize: 30,
                                                             fontWeight:
-                                                                FontWeight.w400),
-
+                                                                FontWeight.bold),
                                                     ),
-                                                       Text(
-                                                          '+ ${mainDataSet[dataItem].subCategory[index].calories} Calories',
-                                                          overflow:
-                                                          TextOverflow.ellipsis,
-                                                          maxLines: 1,
-                                                          softWrap: false,
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                              FontWeight.w400),
-                                                        ),
-
                                                     ],
                                                   ),
-
-
-
-
-                                                  mainDataSet[dataItem]
-                                                                  .subCategory[
-                                                                      index]
-                                                                  .reps ==
-                                                              0 &&
-                                                          mainDataSet[dataItem]
-                                                                  .subCategory[
-                                                                      index]
-                                                                  .workout !=
-                                                              "Rest"
-                                                      ? Column(
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text("TIME",
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.w600)),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "1",
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w900,
-                                                                      fontSize:
-                                                                          35),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text("MIN",
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.w600)),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : Column(
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                    "SETS " +
-                                                                        mainDataSet[dataItem]
-                                                                            .subCategory[
-                                                                                index]
-                                                                            .sets
-                                                                            .toString(),
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.w600)),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  mainDataSet[
-                                                                          dataItem]
-                                                                      .subCategory[
-                                                                          index]
-                                                                      .reps
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w900,
-                                                                      fontSize:
-                                                                          35),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                Text("REPS",
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.w600)),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
                                                 ],
                                               ),
                                             ],
@@ -308,67 +130,6 @@ class SelectedWorkoutPage extends GetView<SelectedWorkoutController> {
                                 )
                               ],
                             ),
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.all(10),
-                            child: controller.watch
-                                ? Padding(
-                                    padding: const EdgeInsets.only(bottom: 0),
-                                    child: StreamBuilder<int>(
-                                      stream: controller.stopWatchTimer.rawTime,
-                                      initialData: controller
-                                          .stopWatchTimer.rawTime.value,
-                                      builder: (context, snap) {
-                                        final value = snap.data!;
-                                        final displayTime =
-                                            StopWatchTimer.getDisplayTime(value,
-                                                hours: controller.isHours);
-                                        return Column(
-                                          children: <Widget>[
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  color: Color.fromRGBO(
-                                                      255, 255, 255, 100),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              padding: const EdgeInsets.all(8),
-                                              child: Text(
-                                                displayTime,
-                                                style: const TextStyle(
-                                                    fontSize: 30,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : null),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: ElevatedButton(
-                            onPressed: () => {
-                              controller.startWorkout(
-                                  mainDataSet[dataItem].day, dataItem),
-                            },
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              enabled: false,
-                              readOnly: true,
-                              controller: controller.startBtnText,
-                              style: TextStyle(
-                                  decoration: null,
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w900),
-                            ),
-                            style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.red)),
                           ),
                         ),
                       ],
