@@ -79,7 +79,7 @@ class SelectedOnlineWorkoutPage extends GetView<SelectedOnlineWorkoutController>
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      itemCount:controller.workoutData['data'].length,
+                                      itemCount:controller.newWorkoutData.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Container(
@@ -109,7 +109,7 @@ class SelectedOnlineWorkoutPage extends GetView<SelectedOnlineWorkoutController>
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children:[
                                                       Text(
-                                                        controller.workoutData['data']['data${index+1}'].toString(),
+                                                        controller.newWorkoutData[index].toString(),
                                                         overflow:
                                                             TextOverflow.ellipsis,
                                                         maxLines: 1,

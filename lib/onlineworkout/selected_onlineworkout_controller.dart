@@ -2,11 +2,16 @@ import 'package:get/get.dart';
 
 class SelectedOnlineWorkoutController extends GetxController {
   final workoutData=Get.arguments;
+  List newWorkoutData=[];
+
 
   @override
   void onInit() {
-    final x=workoutData['data'].removeWhere((x) => x == "");
-    print(x);
+    for(int index=0;index<=10;index++){
+      if(workoutData['data']['data$index']!=null){
+        newWorkoutData.add(workoutData['data']['data$index']);
+      }
+    }
     print('>>> WController init');
     super.onInit();
   }
