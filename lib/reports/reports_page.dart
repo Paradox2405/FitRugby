@@ -45,7 +45,7 @@ class ReportsPage extends GetView<ReportsController> {
                                     children: [
                                       Text("Date",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                                       Text("Duration",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                                      Text("Cals",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                      Text("~Cals",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
 
                                     ],
                                   ),
@@ -84,7 +84,7 @@ class ReportsPage extends GetView<ReportsController> {
                                                       VerticalDivider(width: 1,color: Colors.blueGrey,thickness: 1,),
                                                        Container(padding: EdgeInsets.all(14),child: Text(controller.item["workout$index"]?.entries.elementAt(2).value+" Min",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),),
                                                       VerticalDivider(width: 1,color: Colors.blueGrey,thickness: 1,),
-                                                      Container(padding: EdgeInsets.all(14),child: Text(controller.item["workout$index"]?.entries.elementAt(3).value+" Cal",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),),
+                                                      Container(padding: EdgeInsets.all(14),child: Text(controller.item["workout$index"]?.entries.elementAt(3).value+" Cal~",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),),
                                                     ],
                                                   ),
                                                 ),
